@@ -8,12 +8,11 @@ def part_1() -> int:
         half = len(line)//2
         first_half = line[:half]
         second_half = line[half:]
-        for char in first_half:
-            if char in second_half:
-                upper = char.isupper()
-                points = ord(char) - (38 if upper else 96)
-                solution += points
-                break
+        char_set = set(first_half) & set(second_half)
+        char = char_set.pop()
+        upper = char.isupper()
+        points = ord(char) - (38 if upper else 96)
+        solution += points
 
     return solution
 
@@ -29,3 +28,4 @@ def part_2() -> int:
                 solution += points
                 break
     return solution
+
