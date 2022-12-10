@@ -11,7 +11,10 @@ def part_1() -> int:
         char_set = set(first_half) & set(second_half)
         char = char_set.pop()
         upper = char.isupper()
-        points = ord(char) - (38 if upper else 96)
+        if upper:
+            points = 27 + ord(char) - ord('A')
+        else:
+            points = 1 + ord(char) - ord('a')
         solution += points
 
     return solution
