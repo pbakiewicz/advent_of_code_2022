@@ -50,7 +50,7 @@ def part_2() -> str:
     for quantity, f, t in moves:
         crate_set = all_stacks[f][-quantity:]
         all_stacks[t] += crate_set
-        all_stacks[f] = all_stacks[f][:-quantity]
+        del all_stacks[f][-quantity:]
 
     result = ""
     for stack_no in range(10):
