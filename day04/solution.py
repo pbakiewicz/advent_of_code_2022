@@ -8,16 +8,16 @@ def part_1() -> int:
         first, second = line.split(",")
         first_start, first_end = first.split("-")
         second_start, second_end = second.split("-")
-        first_section = set(range(int(first_start), int(first_end) + 1))
-        second_section = set(range(int(second_start), int(second_end) + 1))
-        if first_section == second_section:
+        first_start, first_end = int(first_start), int(first_end)
+        second_start, second_end = int(second_start), int(second_end)
+
+        if first_start <= second_start <= second_end <= first_end:
             solution += 1
-        elif first_section.issubset(second_section):
-            solution += 1
-        elif second_section.issubset(first_section):
+        elif second_start <= first_start <= first_end <= second_end:
             solution += 1
 
     return solution
+
 
 def part_2() -> int:
     solution = 0
@@ -25,12 +25,12 @@ def part_2() -> int:
         first, second = line.split(",")
         first_start, first_end = first.split("-")
         second_start, second_end = second.split("-")
+        first_start, first_end = int(first_start), int(first_end)
+        second_start, second_end = int(second_start), int(second_end)
 
-        first_section = range(int(first_start), int(first_end) +1)
-        second_section = range(int(second_start), int(second_end) +1)
-
-        if set(first_section) & set(second_section):
+        if not ((first_end < second_start) or (second_end < first_start)):
             solution += 1
+
 
     return solution
 
