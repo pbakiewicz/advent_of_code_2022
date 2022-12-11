@@ -10,7 +10,7 @@ def get_stacks() -> dict:
     
     for line in first_half.split("\n")[:-1]:
         for i, crate_symbol in enumerate(line[1::4]):
-            if crate_symbol.strip():
+            if not crate_symbol.isspace():
                 all_stacks[i + 1].append(crate_symbol)
 
     for crates in all_stacks.values():
