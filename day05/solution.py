@@ -6,11 +6,9 @@ with open("puzzle.txt", "r") as puzzle:
 
 def get_stacks() -> dict:
     all_stacks = defaultdict(list)
-    stack_no = 9
     
     for line in lines[:8]:
-        for i in range(stack_no):
-            crate_symbol = line[1 + i *4]
+        for i, crate_symbol in enumerate(line[1::4]):
             if crate_symbol.strip():
                 all_stacks[i + 1].append(crate_symbol)
 
