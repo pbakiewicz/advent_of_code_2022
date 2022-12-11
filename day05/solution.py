@@ -2,12 +2,13 @@ from collections import defaultdict
 import re
 
 with open("puzzle.txt", "r") as puzzle:
-    lines = puzzle.readlines()
+    lines = puzzle.read()
+    first_half, second_half = lines.split("\n\n")
 
 def get_stacks() -> dict:
     all_stacks = defaultdict(list)
     
-    for line in lines[:8]:
+    for line in first_half.split("\n")[:-1]:
         for i, crate_symbol in enumerate(line[1::4]):
             if crate_symbol.strip():
                 all_stacks[i + 1].append(crate_symbol)
@@ -20,11 +21,11 @@ def get_stacks() -> dict:
 def get_moves() -> list:
     moves = list()
 
-    for line in lines[10:]:
-        pattern = re.compile(r"move (\d+) from (\d+) to (\d+)")
-        quantity, f, t = re.search(pattern,line).groups() 
-        moves.append((int(quantity), int(f), int(t)))
-    
+    for line in second_half.split("\n"):
+        if line:
+            pattern = re.compile(r"move (\d+) from (\d+) to (\d+)")
+            quantity, f, t = re.search(pattern,line).groups() 
+            moves.append((int(quantity), int(f), int(t)))
     return moves
 
 def part_1() -> str:
